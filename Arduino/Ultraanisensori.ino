@@ -9,7 +9,7 @@ bool personDetected = false; // Muuttuja, joka pitää kirjaa siitä, onko henki
 void setup() {
   Serial.begin(9600); // Käynnistä sarjayhteys
   pinMode(trigger, OUTPUT);
-  pinMode(echo, INPUT);
+  pinMode(echo, INPUT);/
 }
 
 void loop() {
@@ -26,7 +26,6 @@ void loop() {
     // Jos sensorin arvo on ylittänyt kynnyksen, lisää laskuria yhdellä ja tulosta viesti
     if (!personDetected) {
       peopleCount++;
-      Serial.print("Ihmisiä yhteensä: ");
       Serial.println(peopleCount);
       personDetected = true; // Aseta henkilön havaitsemisen tilaksi true
     }
