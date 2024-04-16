@@ -1,6 +1,6 @@
 int count = 0;
 int maxCount = 10;
-
+bool lightShowBool = false;
 int forceThreshold = 100;
 
 const int echo = 7;
@@ -11,6 +11,8 @@ bool personDetected = false;
 const int RED_LED_PIN = 9;
 const int GREEN_LED_PIN = 10;
 const int BLUE_LED_PIN = 11;
+
+const int DISPLAY_TIME = 500;
 
 void setup()
 {
@@ -23,6 +25,10 @@ void setup()
 
 void color()
 {
+  if (lightShowBool) {
+    lightShow();
+    return;
+  }
   if (count == maxCount) {
     analogWrite(RED_LED_PIN, 255);
     analogWrite(GREEN_LED_PIN, 0);
@@ -34,19 +40,38 @@ void color()
     analogWrite(BLUE_LED_PIN, 0);
   }
   else {
-    analogWrite(RED_LED_PIN, 127);
-    analogWrite(GREEN_LED_PIN, 127);
+    analogWrite(RED_LED_PIN, 200);
+    analogWrite(GREEN_LED_PIN, 80);
     analogWrite(BLUE_LED_PIN, 0);
   }
 }
 
+void lightShow() {
+  analogWrite(RED_LED_PIN, 0);
+  analogWrite(GREEN_LED_PIN, 0);
+  analogWrite(BLUE_LED_PIN, 255);
+  delay(DISPLAY_TIME);
+  analogWrite(RED_LED_PIN, 0);
+  analogWrite(GREEN_LED_PIN, 0);
+  analogWrite(BLUE_LED_PIN, 0);
+  delay(DISPLAY_TIME);
+}
+
 void loop()
 {
+  if (Serial.available() > 0) {
+    String data = Serial.readStringUntil('\n');
+    if (data == 1) {
+      lightShowBool = true;
+    }
+    else if (data == 0) {
+      lightShowBool = false;
+    }
+  }
   int force = analogRead(A0);
   if (force > forceThreshold && count > 0) {
     count--;
     Serial.println(count);
-    color();
   }
   digitalWrite(trigger, LOW);
   delayMicroseconds(5);
@@ -60,12 +85,12 @@ void loop()
       count++;
       Serial.println(count);
       personDetected = true;
-      color();
     }
   } else {
     if (personDetected) {
       personDetected = false;
     }
   }
+  color();
   delay(1000);
 }
