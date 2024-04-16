@@ -7,7 +7,13 @@ ser = serial.Serial('/dev/ttyUSB0', 9600) # Tarkista porttinumero ja baudinopeus
 def read_from_arduino():
     data = ser.readline()# Lue sarjatiedot ja poista ylimääräiset välilyönnit
     return int(data)
+    
+#Valomerkki-koodi    
+def write_to_arduino(number):
+    ser.write(number)    
 
 # Sulje sarjayhteysportti
 def close_serial():
     ser.close()
+
+
