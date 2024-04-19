@@ -10,7 +10,7 @@ def read_from_arduino():
     
 #Valomerkki-koodi    
 def write_to_arduino(number):
-    ser.write(number)    
+    ser.write(number.encode())
 
 # Sulje sarjayhteysportti
 def close_serial():
