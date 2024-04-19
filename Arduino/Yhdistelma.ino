@@ -1,5 +1,5 @@
 int count = 0;
-int maxCount = 10;
+int maxCount = 6;
 bool lightShowBool = false;
 int forceThreshold = 100;
 
@@ -61,10 +61,10 @@ void loop()
 {
   if (Serial.available() > 0) {
     String data = Serial.readStringUntil('\n');
-    if (data == 1) {
+    if (data == "1") {
       lightShowBool = true;
     }
-    else if (data == 0) {
+    else if (data == "0") {
       lightShowBool = false;
     }
   }
