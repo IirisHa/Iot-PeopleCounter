@@ -41,7 +41,8 @@ def change_lightshow():
 
 win = Tk()
 win.title("People Counter")
-myFont = ("Helvetica", 20, "bold")
+myFont = ("Helvetica", 30, "bold")
+tableFont = ("Helvetica", 20)
 
 frame = Frame(win)
 frame.pack(padx=500, pady=120)
@@ -58,7 +59,11 @@ valomerkki_Button.grid(row=2, column=0, pady=(0,20))
 exitButton = Button(frame, text='Lopeta', font=myFont, command=close, height=1, width=6)
 exitButton.grid(row=3, column=0, pady=(20,0))
 
-# Luo taulukko
+# Luo määrä/aika-taulukko
+style = ttk.Style()
+style.configure("Treeview.Heading", font=myFont)
+style.configure("Treeview", font=tableFont)
+style.configure("Treeview", rowheight=40)
 table_frame = Frame(win)
 table_frame.pack(pady=20)
 table_headers = ['Määrä', 'Aika']
