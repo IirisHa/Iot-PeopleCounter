@@ -40,8 +40,8 @@ void color()
     analogWrite(BLUE_LED_PIN, 0);
   }
   else {
-    analogWrite(RED_LED_PIN, 200);
-    analogWrite(GREEN_LED_PIN, 80);
+    analogWrite(RED_LED_PIN, 255);
+    analogWrite(GREEN_LED_PIN, 50);
     analogWrite(BLUE_LED_PIN, 0);
   }
 }
